@@ -5,9 +5,10 @@
 #pragma once
 
 #include <string>
-
+#include <frc/XboxController.h>
 #include <frc/TimedRobot.h>
 #include <frc/smartdashboard/SendableChooser.h>
+#include <Turret.h>
 
 class Robot : public frc::TimedRobot {
  public:
@@ -29,4 +30,6 @@ class Robot : public frc::TimedRobot {
   const std::string kAutoNameDefault = "Default";
   const std::string kAutoNameCustom = "My Auto";
   std::string m_autoSelected;
+  frc::XboxController m_controller{0};
+  Turret m_turret;
 };

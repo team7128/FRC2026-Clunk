@@ -57,7 +57,10 @@ void Robot::AutonomousPeriodic() {
 
 void Robot::TeleopInit() {}
 
-void Robot::TeleopPeriodic() {}
+void Robot::TeleopPeriodic() {
+  double Turretspeed = m_controller.GetLeftX();
+  m_turret.SetSpeed(Turretspeed / 10.f);
+}
 
 void Robot::DisabledInit() {}
 
