@@ -4,6 +4,7 @@
 
 #include "Robot.h"
 
+#include <frc/shuffleboard/Shuffleboard.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <wpi/print.h>
 
@@ -11,6 +12,7 @@ Robot::Robot() {
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
+  frc::SmartDashboard::PutNumber("Turret Target", m_turret.GetAngle());
 }
 
 /**
@@ -21,7 +23,10 @@ Robot::Robot() {
  * <p> This runs after the mode specific periodic functions, but before
  * LiveWindow and SmartDashboard integrated updating.
  */
-void Robot::RobotPeriodic() {}
+void Robot::RobotPeriodic()
+{
+  frc::SmartDashboard::PutNumber("Turret Angle", m_turret.GetAngle());
+}
 
 /**
  * This autonomous (along with the chooser code above) shows how to select
@@ -34,25 +39,13 @@ void Robot::RobotPeriodic() {}
  * if-else structure below with additional strings. If using the SendableChooser
  * make sure to add them to the chooser code above as well.
  */
-void Robot::AutonomousInit() {
-  m_autoSelected = m_chooser.GetSelected();
-  // m_autoSelected = SmartDashboard::GetString("Auto Selector",
-  //     kAutoNameDefault);
-  wpi::print("Auto selected: {}\n", m_autoSelected);
-
-  if (m_autoSelected == kAutoNameCustom) {
-    // Custom Auto goes here
-  } else {
-    // Default Auto goes here
-  }
-}
+void Robot::AutonomousInit() {}
 
 void Robot::AutonomousPeriodic() {
-  if (m_autoSelected == kAutoNameCustom) {
-    // Custom Auto goes here
-  } else {
-    // Default Auto goes here
-  }
+  double turretTarget = frc::SmartDashboard::GetNumber("Turret Target", m_turret.GetAngle());
+
+  m_turret.SetTargetAngle(turretTarget);
+  m_turret.Periodic();
 }
 
 void Robot::TeleopInit() {}
