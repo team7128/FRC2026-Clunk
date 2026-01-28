@@ -25,7 +25,7 @@ m_targetangle = targetangle;
 void Turret::Periodic() {
     float currentAngle = m_motorcontrol.GetEncoder().GetPosition();
     m_turretpid.SetGoal(units::degree_t(m_targetangle));
-    m_motorcontrol.Set(m_turretpid.Calculate(units::degree_t(m_motorcontrol.GetEncoder().GetPosition())) + m_turretfeedforward.Calculate(m_turretpid.GetSetpoint().velocity));
+    m_motorcontrol.SetVoltage(units::volt_t(m_turretpid.Calculate(units::degree_t(m_motorcontrol.GetEncoder().GetPosition()))) + m_turretfeedforward.Calculate(m_turretpid.GetSetpoint().velocity));
 
     if (m_turretpid.AtSetpoint())
         m_turretpid.Reset(units::degree_t(currentAngle));
