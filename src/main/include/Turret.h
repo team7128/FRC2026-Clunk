@@ -8,24 +8,38 @@
 #include <units/angular_velocity.h>
 #include <units/angular_acceleration.h>
 #include <units/voltage.h>
+#include <frc2/command/CommandPtr.h>
+#include <frc2/command/SubsystemBase.h>
+#include <frc/DigitalInput.h>
 
-class Turret {
+class Turret : public frc2::SubsystemBase {
     private:
     rev::spark::SparkMax m_motorcontrol{5, rev::spark::SparkLowLevel::MotorType::kBrushless};
     float m_targetangle;
 
     using ffType = frc::SimpleMotorFeedforward<units::degrees>;
 
-    frc::TrapezoidProfile<units::degree>::Constraints m_turretconstraints{180_deg_per_s, 1800_deg_per_s_sq};
     ffType m_turretfeedforward{0_V, units::unit_t<ffType::kv_unit>(0.0), units::unit_t<ffType::ka_unit>(0)};
-    frc::ProfiledPIDController<units::degree> m_turretpid{0.0003, 0, 0, m_turretconstraints};
+    frc::PIDController m_turretpid{0.06, 0, 0};
+
+    frc::DigitalInput m_limitSwitch{0};
 
     public:
     Turret();
     
-    void SetSpeed(double speed); 
+    frc2::CommandPtr HomePosition();
+    frc2::CommandPtr SetSpeed(double speed); 
+    frc2::CommandPtr SetSpeed(std::function<double()> speed); 
     void SetTargetAngle(float targetangle);
+    void SetTargetLocation(float targetX, float targetY);
     void Periodic();
+    frc2::CommandPtr TrackTargetCmd();
+
+    float turretX;
+    float turretY;
+    float m_targetX;
+    float m_targetY;
+    float robotAngle;
 
     float GetAngle();
 };
