@@ -9,6 +9,7 @@
 #include <frc/TimedRobot.h>
 #include <frc/smartdashboard/SendableChooser.h>
 #include <Turret.h>
+#include <Intake.h>
 
 class Robot : public frc::TimedRobot {
  public:
@@ -32,4 +33,5 @@ class Robot : public frc::TimedRobot {
   std::string m_autoSelected;
   frc::XboxController m_controller{0};
   Turret m_turret;
+  Intake m_intake;
 };
