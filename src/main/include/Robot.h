@@ -12,6 +12,7 @@
 #include <Intake.h>
 #include <frc2/command/button/CommandXboxController.h>
 #include <Shooter.h>
+#include <Indexer.h>
 
 class Robot : public frc::TimedRobot {
  public:
@@ -37,4 +38,5 @@ class Robot : public frc::TimedRobot {
   Turret m_turret;
   Intake m_intake;
   Shooter m_shooter;
+  Indexer m_indexer;
 };

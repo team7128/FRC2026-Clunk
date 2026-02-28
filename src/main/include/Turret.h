@@ -29,7 +29,7 @@ class Turret : public frc2::SubsystemBase {
     
     frc2::CommandPtr HomePosition();
     frc2::CommandPtr SetSpeed(double speed); 
-    frc2::CommandPtr SetSpeed(std::function<double()> speed); 
+    frc2::CommandPtr SetSpeedCmd(std::function<double()> speed); 
     void SetTargetAngle(float targetangle);
     void SetTargetLocation(float targetX, float targetY);
     void Periodic();

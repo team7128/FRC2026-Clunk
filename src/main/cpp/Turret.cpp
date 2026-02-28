@@ -28,7 +28,7 @@ frc2::CommandPtr Turret::SetSpeed(double speed) {
 return this->Run([this, speed] { this->m_motorcontrol.Set(speed); });
 }
 
-frc2::CommandPtr Turret::SetSpeed(std::function<double()> speed) {
+frc2::CommandPtr Turret::SetSpeedCmd(std::function<double()> speed) {
 return this->Run([this, speed] { this->m_motorcontrol.Set(speed()); });
 }
 

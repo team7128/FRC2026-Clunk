@@ -20,18 +20,13 @@ Robot::Robot() {
 
   m_controller.Back().WhileTrue(m_turret.HomePosition());
   m_controller.Start().WhileTrue(m_turret.TrackTargetCmd());
+  m_controller.LeftBumper().WhileTrue(m_intake.SetSpeedCmd( [] { return 0.8; }));
+  m_controller.RightBumper().WhileTrue(m_indexer.SetSpeedCmd( [] { return 1; }));
+  m_controller.A().WhileTrue(m_shooter.SetSpeedCmd( [] { return 0.2; }));
 
-  m_controller.AxisMagnitudeGreaterThan(4, 0.1).WhileTrue(m_turret.SetSpeed([this] { return m_controller.GetRightX(); }));
+  m_controller.AxisMagnitudeGreaterThan(4, 0.1).WhileTrue(m_turret.SetSpeedCmd([this] { return m_controller.GetRightX(); }));
 }
 
-/**
- * This function is called every 20 ms, no matter the mode. Use
- * this for items like diagnostics that you want ran during disabled,
- * autonomous, teleoperated and test.
- *
- * <p> This runs after the mode specific periodic functions, but before
- * LiveWindow and SmartDashboard integrated updating.
- */
 void Robot::RobotPeriodic()
 {
   frc2::CommandScheduler::GetInstance().Run();
@@ -61,32 +56,13 @@ void Robot::AutonomousPeriodic() {
 
 void Robot::TeleopInit() {}
 
-void Robot::TeleopPeriodic() {
-  double Turretspeed = m_controller.GetLeftX();
-  m_turret.SetSpeed(Turretspeed / 10.f);
-
-  double intakeSpeed = frc::SmartDashboard::GetNumber("Intake Speed", 0);
-
-  if (m_controller.LeftBumper().Get()) {
-    m_intake.SetSpeed(intakeSpeed);
-  } else {
-    m_intake.SetSpeed(0);
-  }
-  if (m_controller.A().Get()) {
-    m_shooter.SetSpeed(0.2);
-  } else {
-    m_shooter.SetSpeed(0);
-  }
-}
+void Robot::TeleopPeriodic() {}
 
 void Robot::DisabledInit() {}
 
 void Robot::DisabledPeriodic() {}
 
-void Robot::TestInit()
-{
-  m_shooter.SetDefaultCommand(m_shooter.SetSpeed([this] { return m_controller.GetRightY(); }));
-}
+void Robot::TestInit() {}
 
 void Robot::TestPeriodic() {}
 

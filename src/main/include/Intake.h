@@ -12,5 +12,5 @@ class Intake : public frc2::SubsystemBase {
     Intake();
 
     void SetSpeed(double speed);
-    frc2::CommandPtr SetSpeedCmd(double speed);
+    frc2::CommandPtr SetSpeedCmd(std::function<float()> speed);
 };

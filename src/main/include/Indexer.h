@@ -13,5 +13,5 @@ class Indexer : public frc2::SubsystemBase {
     Indexer();
 
     void SetSpeed(double speed);
-    frc2::CommandPtr SetSpeedCmd(double speed);
+    frc2::CommandPtr SetSpeedCmd(std::function<float()> speed);
 };
