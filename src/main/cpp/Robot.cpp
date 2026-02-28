@@ -48,7 +48,18 @@ void Robot::RobotPeriodic()
  * if-else structure below with additional strings. If using the SendableChooser
  * make sure to add them to the chooser code above as well.
  */
-void Robot::AutonomousInit() {}
+void Robot::AutonomousInit() {
+  m_autoSelected = m_chooser.GetSelected();
+  // m_autoSelected = SmartDashboard::GetString("Auto Selector",
+  //     kAutoNameDefault);
+  wpi::print("Auto selected: {}\n", m_autoSelected);
+
+  if (m_autoSelected == kAutoNameCustom) {
+    // Custom Auto goes here
+  } else {
+    // Default Auto goes here
+  }
+}
 
 void Robot::AutonomousPeriodic() {
   double targetX = frc::SmartDashboard::GetNumber("Target X", m_turret.GetAngle());
@@ -61,15 +72,24 @@ void Robot::AutonomousPeriodic() {
 void Robot::TeleopInit() {}
 
 void Robot::TeleopPeriodic() {
-  // double turretSpeed = m_controller.GetLeftX();
-  // m_turret.SetSpeed(turretSpeed / 10.f);
+  double Turretspeed = m_controller.GetLeftX();
+  m_turret.SetSpeed(Turretspeed / 10.f);
+
+  if (m_controller.A().Get()) {
+    m_shooter.SetSpeed(0.2);
+  } else {
+    m_shooter.SetSpeed(0);
+  }
 }
 
 void Robot::DisabledInit() {}
 
 void Robot::DisabledPeriodic() {}
 
-void Robot::TestInit() {}
+void Robot::TestInit()
+{
+  m_shooter.SetDefaultCommand(m_shooter.SetSpeed([this] { return m_controller.GetRightY(); }));
+}
 
 void Robot::TestPeriodic() {}
 
