@@ -10,6 +10,8 @@
 #include <frc/smartdashboard/SendableChooser.h>
 #include <Turret.h>
 #include <Intake.h>
+#include <frc2/command/button/CommandXboxController.h>
+#include <Shooter.h>
 
 class Robot : public frc::TimedRobot {
  public:
@@ -31,7 +33,8 @@ class Robot : public frc::TimedRobot {
   const std::string kAutoNameDefault = "Default";
   const std::string kAutoNameCustom = "My Auto";
   std::string m_autoSelected;
-  frc::XboxController m_controller{0};
+  frc2::CommandXboxController m_controller{0};
   Turret m_turret;
   Intake m_intake;
+  Shooter m_shooter;
 };
