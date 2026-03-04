@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Constants.h"
+
 #include <rev/SparkMax.h>
 #include <frc/controller/PIDController.h>
 #include <frc/controller/ProfiledPIDController.h>
@@ -14,15 +16,15 @@
 
 class Turret : public frc2::SubsystemBase {
     private:
-    rev::spark::SparkMax m_motorcontrol{5, rev::spark::SparkLowLevel::MotorType::kBrushless};
+    rev::spark::SparkMax m_motorcontrol{TurretConstants::kSparkID, rev::spark::SparkLowLevel::MotorType::kBrushless};
     float m_targetangle;
 
     using ffType = frc::SimpleMotorFeedforward<units::degrees>;
 
-    ffType m_turretfeedforward{0_V, units::unit_t<ffType::kv_unit>(0.0), units::unit_t<ffType::ka_unit>(0)};
-    frc::PIDController m_turretpid{0.06, 0, 0};
+    ffType m_turretfeedforward{TurretConstants::kFFVoltage, units::unit_t<ffType::kv_unit>(TurretConstants::kFFkV), units::unit_t<ffType::ka_unit>(TurretConstants::kFFka)};
+    frc::PIDController m_turretpid{TurretConstants::kP, TurretConstants::kI, TurretConstants::kD};
 
-    frc::DigitalInput m_limitSwitch{0};
+    frc::DigitalInput m_limitSwitch{TurretConstants::kLimitSwitchID};
 
     public:
     Turret();

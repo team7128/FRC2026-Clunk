@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "Robot.h"
+#include "Constants.h"
 
 #include <frc/shuffleboard/Shuffleboard.h>
 #include <frc/smartdashboard/SmartDashboard.h>
@@ -16,15 +17,17 @@ Robot::Robot() {
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
   frc::SmartDashboard::PutNumber("Intake Speed", 0);
 
-  m_turret.SetTargetLocation(10, 10);
+  m_turret.SetTargetLocation(RobotConstants::kTargetX, RobotConstants::kTargetY);
 
   m_controller.Back().WhileTrue(m_turret.HomePosition());
   m_controller.Start().WhileTrue(m_turret.TrackTargetCmd());
-  m_controller.LeftBumper().WhileTrue(m_intake.SetSpeedCmd( [] { return 0.8; }));
-  m_controller.RightBumper().WhileTrue(m_indexer.SetSpeedCmd( [] { return 1; }));
-  m_controller.A().WhileTrue(m_shooter.SetSpeedCmd( [] { return 0.2; }));
+  m_controller.LeftBumper().WhileTrue(m_intake.SetSpeedCmd( [] { return RobotConstants::kIntakeSpeed; }));
+  m_controller.RightBumper().WhileTrue(m_indexer.SetSpeedCmd( [] { return RobotConstants::kIndexerSpeed; }));
+  m_controller.A().WhileTrue(m_shooter.SetSpeedCmd( [] { return RobotConstants::kShooterSpeed; }));
+  m_controller.Y().OnTrue(m_winch.Lift());
+  m_controller.Y().OnFalse(m_winch.Lower());
 
-  m_controller.AxisMagnitudeGreaterThan(4, 0.1).WhileTrue(m_turret.SetSpeedCmd([this] { return m_controller.GetRightX(); }));
+  m_controller.AxisMagnitudeGreaterThan(RobotConstants::kTurretAxis, RobotConstants::kTurretThreshold).WhileTrue(m_turret.SetSpeedCmd([this] { return m_controller.GetRightX(); }));
 }
 
 void Robot::RobotPeriodic()
