@@ -11,7 +11,9 @@
 
 #include <frc2/command/CommandScheduler.h>
 
-Robot::Robot() {
+Robot::Robot() :
+  m_odometry([this] { return m_drivebase.GetLeftDistance(); }, [this] { return m_drivebase.GetRightDistance(); })
+{
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);

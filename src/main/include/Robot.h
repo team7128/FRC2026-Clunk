@@ -11,6 +11,7 @@
 #include "Winch.h"
 #include "Constants.h"
 #include "Drivebase.h"
+#include "Odometry.h"
 
 #include <string>
 #include <frc/XboxController.h>
@@ -45,4 +46,5 @@ class Robot : public frc::TimedRobot {
   Indexer m_indexer;
   Winch m_winch;
   Drivebase m_drivebase;
+  Odometry m_odometry;
 };
