@@ -2,10 +2,12 @@
 
 #include <frc/TimedRobot.h>
 #include <frc2/command/CommandPtr.h>
-#include "drivebase.h"
+#include "Drivebase.h"
+#include "Odometry.h"
 
 class Robot : public frc::TimedRobot {
 public:
+    Robot();
     void RobotInit() override;
     void RobotPeriodic() override;
     void AutonomousInit() override;
@@ -21,4 +23,5 @@ public:
 
 private:
     Drivebase m_drivebase;
+    Odometry m_odometry;
 };

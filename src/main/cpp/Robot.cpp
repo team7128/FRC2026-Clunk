@@ -1,6 +1,10 @@
 #include "Robot.h"
 #include <frc2/command/CommandScheduler.h>
 
+Robot::Robot() :
+  m_odometry([this] { return m_drivebase.GetLeftDistance(); }, [this] { return m_drivebase.GetRightDistance(); })
+{};
+
 void Robot::RobotInit() {
 }
 
