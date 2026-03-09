@@ -52,6 +52,12 @@ void Robot::AutonomousInit() {
 void Robot::AutonomousPeriodic() {
   double targetX = frc::SmartDashboard::GetNumber("Target X", m_turret.GetAngle());
   double targetY = frc::SmartDashboard::GetNumber("Target Y", m_turret.GetAngle());
+  
+  if (m_controller.B().Get()) {
+    m_shooter.SetSpeed(m_shooter.CalculateSpeed(targetX, targetY));
+  } else {
+    m_shooter.SetSpeed(0);
+  }
 
   m_turret.SetTargetLocation(targetX, targetY);
   m_turret.Periodic();

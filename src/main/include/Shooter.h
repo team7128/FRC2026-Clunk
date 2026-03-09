@@ -15,4 +15,12 @@ class Shooter : public frc2::SubsystemBase {
 
     frc2::CommandPtr SetSpeed(double speed);
     frc2::CommandPtr SetSpeedCmd(std::function<float()> speed);
+    double CalculateSpeed(float shooterTargetX, float shooterTargetY);
+
+    float shooterX;
+    float shooterY;
+    double shooterSpeed;
+
+    float m_shooterTargetX;
+    float m_shooterTargetY;
 };

@@ -6,11 +6,13 @@
 #include <frc2/command/SubsystemBase.h>
 
 #include <ctre/phoenix/motorcontrol/can/WPI_VictorSPX.h>
+#include <ctre/phoenix/motorcontrol/can/WPI_TalonSRX.h>
 #include <frc/DigitalInput.h>
 
 class Winch : public frc2::SubsystemBase {
     private:
-    ctre::phoenix::motorcontrol::can::WPI_VictorSPX m_motor{WinchConstants::kSparkID};
+    ctre::phoenix::motorcontrol::can::TalonSRX m_motorLeft{WinchConstants::kTalonLeftID};
+    ctre::phoenix::motorcontrol::can::TalonSRX m_motorRight{WinchConstants::kTalonRightID};
     frc::DigitalInput m_limitswitch{WinchConstants::kLimitSwitchID};
 
     public:
