@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 #include "Robot.h"
 #include "Constants.h"
 
@@ -11,7 +7,9 @@
 
 #include <frc2/command/CommandScheduler.h>
 
-Robot::Robot() {
+Robot::Robot() :
+  m_odometry([this] { return m_drivebase.GetLeftDistance(); }, [this] { return m_drivebase.GetRightDistance(); })
+{
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
@@ -28,25 +26,13 @@ Robot::Robot() {
   m_controller.Y().OnFalse(m_winch.Lower());
 
   m_controller.AxisMagnitudeGreaterThan(RobotConstants::kTurretAxis, RobotConstants::kTurretThreshold).WhileTrue(m_turret.SetSpeedCmd([this] { return m_controller.GetRightX(); }));
-}
+};
 
-void Robot::RobotPeriodic()
-{
+void Robot::RobotPeriodic() {
   frc2::CommandScheduler::GetInstance().Run();
-  frc::SmartDashboard::PutNumber("Turret Angle", m_turret.GetAngle());
 }
 
 void Robot::AutonomousInit() {
-  m_autoSelected = m_chooser.GetSelected();
-  // m_autoSelected = SmartDashboard::GetString("Auto Selector",
-  //     kAutoNameDefault);
-  wpi::print("Auto selected: {}\n", m_autoSelected);
-
-  if (m_autoSelected == kAutoNameCustom) {
-    // Custom Auto goes here
-  } else {
-    // Default Auto goes here
-  }
 }
 
 void Robot::AutonomousPeriodic() {
@@ -63,21 +49,29 @@ void Robot::AutonomousPeriodic() {
   m_turret.Periodic();
 }
 
-void Robot::TeleopInit() {}
+void Robot::TeleopInit() {
+}
 
-void Robot::TeleopPeriodic() {}
+void Robot::TeleopPeriodic() {
+}
 
-void Robot::DisabledInit() {}
+void Robot::DisabledInit() {
+}
 
-void Robot::DisabledPeriodic() {}
+void Robot::DisabledPeriodic() {
+}
 
-void Robot::TestInit() {}
+void Robot::TestInit() {
+}
 
-void Robot::TestPeriodic() {}
+void Robot::TestPeriodic() {
+}
 
-void Robot::SimulationInit() {}
+void Robot::SimulationInit() {
+}
 
-void Robot::SimulationPeriodic() {}
+void Robot::SimulationPeriodic() {
+}
 
 #ifndef RUNNING_FRC_TESTS
 int main() {
