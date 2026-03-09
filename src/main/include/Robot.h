@@ -1,38 +1,27 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 #pragma once
 
-#include <string>
-#include <frc/XboxController.h>
 #include <frc/TimedRobot.h>
-#include <frc/smartdashboard/SendableChooser.h>
-#include <Turret.h>
-#include <frc2/command/button/CommandXboxController.h>
-#include <Shooter.h>
+#include <frc2/command/CommandPtr.h>
+#include "Drivebase.h"
+#include "Odometry.h"
 
 class Robot : public frc::TimedRobot {
- public:
-  Robot();
-  void RobotPeriodic() override;
-  void AutonomousInit() override;
-  void AutonomousPeriodic() override;
-  void TeleopInit() override;
-  void TeleopPeriodic() override;
-  void DisabledInit() override;
-  void DisabledPeriodic() override;
-  void TestInit() override;
-  void TestPeriodic() override;
-  void SimulationInit() override;
-  void SimulationPeriodic() override;
+public:
+    Robot();
+    void RobotInit() override;
+    void RobotPeriodic() override;
+    void AutonomousInit() override;
+    void AutonomousPeriodic() override;
+    void TeleopInit() override;
+    void TeleopPeriodic() override;
+    void DisabledInit() override;
+    void DisabledPeriodic() override;
+    void TestInit() override;
+    void TestPeriodic() override;
+    void SimulationInit() override;
+    void SimulationPeriodic() override;
 
- private:
-  frc::SendableChooser<std::string> m_chooser;
-  const std::string kAutoNameDefault = "Default";
-  const std::string kAutoNameCustom = "My Auto";
-  std::string m_autoSelected;
-  frc2::CommandXboxController m_controller{0};
-  Turret m_turret;
-  Shooter m_shooter;
+private:
+    Drivebase m_drivebase;
+    Odometry m_odometry;
 };
