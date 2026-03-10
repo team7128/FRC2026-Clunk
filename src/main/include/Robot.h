@@ -12,6 +12,7 @@
 #include "Constants.h"
 #include "Drivebase.h"
 #include "Odometry.h"
+#include "Sequences.h"
 
 #include <string>
 #include <frc/XboxController.h>
@@ -39,7 +40,8 @@ class Robot : public frc::TimedRobot {
   const std::string kAutoNameDefault = "Default";
   const std::string kAutoNameCustom = "My Auto";
   std::string m_autoSelected;
-  frc2::CommandXboxController m_controller{RobotConstants::kControllerID};
+  frc2::CommandXboxController m_driveController{RobotConstants::kDriveControllerID};
+  frc2::CommandXboxController m_shootController{RobotConstants::kShootControllerID};
   Turret m_turret;
   Intake m_intake;
   Shooter m_shooter;

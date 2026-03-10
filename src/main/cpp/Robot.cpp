@@ -21,15 +21,24 @@ Robot::Robot() :
 
   m_turret.SetTargetLocation(RobotConstants::kTargetX, RobotConstants::kTargetY);
 
-  m_controller.Back().WhileTrue(m_turret.HomePosition());
-  m_controller.Start().WhileTrue(m_turret.TrackTargetCmd());
-  m_controller.LeftBumper().WhileTrue(m_intake.SetSpeedCmd( [] { return RobotConstants::kIntakeSpeed; }));
-  m_controller.RightBumper().WhileTrue(m_indexer.SetSpeedCmd( [] { return RobotConstants::kIndexerSpeed; }));
-  m_controller.A().WhileTrue(m_shooter.SetSpeedCmd( [] { return RobotConstants::kShooterSpeed; }));
-  m_controller.Y().OnTrue(m_winch.Lift());
-  m_controller.Y().OnFalse(m_winch.Lower());
+  m_drivebase.SetDefaultCommand(m_drivebase.ArcadeDriveCmd(
+		[this] { return -m_driveController.GetLeftY() * RobotConstants::kForwardMultiplier; },
+		[this] { return -m_driveController.GetRightX() * RobotConstants::kTurnMultiplier; }
+	));
 
-  m_controller.AxisMagnitudeGreaterThan(RobotConstants::kTurretAxis, RobotConstants::kTurretThreshold).WhileTrue(m_turret.SetSpeedCmd([this] { return m_controller.GetRightX(); }));
+  m_driveController.B().WhileTrue(m_intake.SetSpeedCmd( [] { return RobotConstants::kIntakeSpeed; }));
+  m_driveController.A().OnTrue(m_winch.Lift());
+  m_driveController.A().OnFalse(m_winch.Lower());
+
+  m_shootController.Back().WhileTrue(m_turret.HomePosition());
+  m_shootController.Start().WhileTrue(m_turret.TrackTargetCmd());
+  m_shootController.LeftBumper().WhileTrue(m_indexer.SetSpeedCmd( [] { return RobotConstants::kIndexerSpeed; }));
+  
+  m_shootController.X().WhileTrue(m_shooter.SetSpeedCmd( [] { return RobotConstants::kHubShooterSpeed; }));
+
+  m_shootController.Y().WhileTrue(m_shooter.SetSpeedCmd( [] { return RobotConstants::kPassShooterSpeed; }));
+
+  m_shootController.AxisMagnitudeGreaterThan(RobotConstants::kTurretAxis, RobotConstants::kTurretThreshold).WhileTrue(m_turret.SetSpeedCmd([this] { return m_driveController.GetRightX(); }));
 }
 
 void Robot::RobotPeriodic()
@@ -55,7 +64,7 @@ void Robot::AutonomousPeriodic() {
   double targetX = frc::SmartDashboard::GetNumber("Target X", m_turret.GetAngle());
   double targetY = frc::SmartDashboard::GetNumber("Target Y", m_turret.GetAngle());
   
-  if (m_controller.B().Get()) {
+  if (m_shootController.LeftStick().Get()) {
     m_shooter.SetSpeed(m_shooter.CalculateSpeed(targetX, targetY));
   } else {
     m_shooter.SetSpeed(0);

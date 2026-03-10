@@ -11,11 +11,20 @@ namespace RobotConstants {
 
     constexpr double kIntakeSpeed = 0.8;
     constexpr double kIndexerSpeed = 1;
-    constexpr double kShooterSpeed = 0.2;
+    constexpr double kHubShooterSpeed = 1;
+    constexpr double kPassShooterSpeed = 0.3;
     constexpr int kTurretAxis = 4;
     constexpr double kTurretThreshold = 0.1;
 
-    constexpr int kControllerID = 0;
+    constexpr int kDriveControllerID = 0;
+    constexpr int kShootControllerID = 1;
+
+    constexpr float kForwardMultiplier = 0.8f;
+    constexpr float kTurnMultiplier = 0.6f;
+}
+
+namespace SequenceConstants {
+    constexpr auto kIndexDelaySpeed = 0.8_s;
 }
 
 namespace ShooterConstants {
