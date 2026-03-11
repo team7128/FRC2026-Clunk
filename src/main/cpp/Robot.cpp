@@ -38,7 +38,14 @@ Robot::Robot() :
 
   m_shootController.Y().WhileTrue(m_shooter.SetSpeedCmd( [] { return RobotConstants::kPassShooterSpeed; }));
 
+  m_shootController.A().WhileTrue(Sequences::RunHubShooterSystem(&m_shooter, &m_turret, &m_indexer));
+  m_shootController.B().WhileTrue(Sequences::RunPassShooterSystem(&m_shooter, &m_turret, &m_indexer));
+
   m_shootController.AxisMagnitudeGreaterThan(RobotConstants::kTurretAxis, RobotConstants::kTurretThreshold).WhileTrue(m_turret.SetSpeedCmd([this] { return m_driveController.GetRightX(); }));
+
+  if (!(m_shootController.A().Get()) && !(m_shootController.B().Get()) && !(m_shootController.X().Get()) && !(m_shootController.Y().Get())) {
+    Sequences::StopShooterSystem(&m_shooter, &m_indexer);
+  }
 }
 
 void Robot::RobotPeriodic()
