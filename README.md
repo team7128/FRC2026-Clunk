@@ -8,7 +8,8 @@ Driver Controller
 | Left stick | Drive forward |
 | Right stick | Turn |
 | A | Lift intake |
-| B | Run intake |
+| B | Lower intake |
+| Y | Run intake |
 
 Shooter Controller
 | Button | Action |
