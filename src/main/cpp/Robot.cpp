@@ -12,7 +12,7 @@
 #include <frc2/command/CommandScheduler.h>
 
 Robot::Robot() :
-  m_odometry([this] { return m_drivebase.GetLeftDistance(); }, [this] { return m_drivebase.GetRightDistance(); })
+  m_odometry([this] { return m_drivebase.GetLeftDistance(); }, [this] { return m_drivebase.GetRightDistance(); }, [this] { return units::degree_t(m_turret.GetAngle()); })
 {
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);

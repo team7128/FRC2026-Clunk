@@ -6,9 +6,11 @@
 #include <studica/AHRS.h>
 #include <frc2/command/CommandPtr.h>
 #include <frc2/command/SubsystemBase.h>
+#include <photon/PhotonCamera.h>
+#include <photon/PhotonPoseEstimator.h>
 
 class Odometry : public frc2::SubsystemBase {
-    private:
+private:
     studica::AHRS m_navXGyro{studica::AHRS::NavXComType::kMXP_SPI};
 
     frc::DifferentialDriveKinematics m_kinematics{ 0.6_m };
@@ -16,8 +18,16 @@ class Odometry : public frc2::SubsystemBase {
 
     public:
     Odometry();
-    Odometry(std::function<units::meter_t()> leftDistanceSource, std::function<units::meter_t()> rightDistanceSource);
+    Odometry(std::function<units::meter_t()> leftDistanceSource, std::function<units::meter_t()> rightDistanceSource, std::function<units::degree_t()> turretAngleSource);
     void Periodic();
 
     std::function<units::meter_t()> m_leftDistanceSource, m_rightDistanceSource;
+
+private:
+    std::function<units::degree_t()> m_turretAngleSource;
+    photon::PhotonCamera m_visionCam{ "VisionCam" };
+    photon::PhotonPoseEstimator m_visionPoseEstimator{ frc::AprilTagFieldLayout::LoadField(frc::AprilTagField::k2025ReefscapeAndyMark), frc::Transform3d() };
+
+private:
+    void UpdateVisionTransform();
 };
