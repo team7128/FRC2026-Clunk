@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Constants.h"
+
 #include <frc/drive/DifferentialDrive.h>
 #include <frc2/command/CommandPtr.h>
 #include <frc2/command/SubsystemBase.h>
@@ -22,10 +24,10 @@ private:
     void Stop();
 
 private:
-    rev::spark::SparkMax m_motorFL{ 1, rev::spark::SparkBase::MotorType::kBrushless},
-    m_motorBL{ 2, rev::spark::SparkBase::MotorType::kBrushless},
-    m_motorFR{ 3, rev::spark::SparkBase::MotorType::kBrushless},
-    m_motorBR{ 4, rev::spark::SparkBase::MotorType::kBrushless};
+    rev::spark::SparkMax m_motorFL{ IDConstants::kSparkFL, rev::spark::SparkBase::MotorType::kBrushless},
+    m_motorBL{ IDConstants::kSparkFR, rev::spark::SparkBase::MotorType::kBrushless},
+    m_motorFR{ IDConstants::kSparkBL, rev::spark::SparkBase::MotorType::kBrushless},
+    m_motorBR{ IDConstants::kSparkBR, rev::spark::SparkBase::MotorType::kBrushless};
     
     frc::DifferentialDrive m_diffDrive{ m_motorFL, m_motorFR};
 };

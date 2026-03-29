@@ -8,12 +8,11 @@
 
 class Indexer : public frc2::SubsystemBase {
     private:
-    ctre::phoenix::motorcontrol::can::WPI_VictorSPX m_motorIndex{IndexerConstants::kVictorIndexerID};
-    ctre::phoenix::motorcontrol::can::WPI_VictorSPX m_motorConveyor{IndexerConstants::kVictorConveyorID};
+    ctre::phoenix::motorcontrol::can::WPI_VictorSPX m_motorTransfer, m_motorConveyor;
 
     public:
     Indexer();
 
-    void SetSpeed(double speed);
-    frc2::CommandPtr SetSpeedCmd(std::function<float()> speed);
+    frc2::CommandPtr RunCmd(std::function<float()> speed);
+    frc2::CommandPtr StopCmd();
 };

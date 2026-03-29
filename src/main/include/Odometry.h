@@ -17,7 +17,6 @@ private:
     frc::DifferentialDrivePoseEstimator m_poseEstimator{m_kinematics, m_navXGyro.GetRotation2d(), 0_m, 0_m, frc::Pose2d()};
 
     public:
-    Odometry();
     Odometry(std::function<units::meter_t()> leftDistanceSource, std::function<units::meter_t()> rightDistanceSource, std::function<units::degree_t()> turretAngleSource);
     void Periodic();
 
@@ -26,7 +25,7 @@ private:
 private:
     std::function<units::degree_t()> m_turretAngleSource;
     photon::PhotonCamera m_visionCam{ "VisionCam" };
-    photon::PhotonPoseEstimator m_visionPoseEstimator{ frc::AprilTagFieldLayout::LoadField(frc::AprilTagField::k2026RebuiltAndyMark), frc::Transform3d() };
+    photon::PhotonPoseEstimator m_visionPoseEstimator{ frc::AprilTagFieldLayout::LoadField(frc::AprilTagField::k2025ReefscapeAndyMark), frc::Transform3d() };
 
 private:
     void UpdateVisionTransform();

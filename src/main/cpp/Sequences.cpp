@@ -6,7 +6,7 @@ frc2::CommandPtr Sequences::RunHubShooterSystem(Shooter *m_shooter, Turret *m_tu
     return m_shooter->SetSpeedCmd( [] { return RobotConstants::kHubShooterSpeed; })
         .AlongWith(m_turret->TrackTargetCmd()).Repeatedly()
             .AlongWith(frc2::cmd::Wait(SequenceConstants::kIndexDelaySpeed)
-                .AndThen(m_indexer->SetSpeedCmd( [] { return RobotConstants::kIndexerSpeed; })).Repeatedly()
+                .AndThen(m_indexer->RunCmd( [] { return RobotConstants::kIndexerSpeed; })).Repeatedly()
     );
 }
 
@@ -14,11 +14,11 @@ frc2::CommandPtr Sequences::RunPassShooterSystem(Shooter *m_shooter, Turret *m_t
     return m_shooter->SetSpeedCmd( [] { return RobotConstants::kPassShooterSpeed; })
         .AlongWith(m_turret->TrackTargetCmd()).Repeatedly()
             .AlongWith(frc2::cmd::Wait(SequenceConstants::kIndexDelaySpeed)
-                .AndThen(m_indexer->SetSpeedCmd( [] { return RobotConstants::kIndexerSpeed; })).Repeatedly()
+                .AndThen(m_indexer->RunCmd( [] { return RobotConstants::kIndexerSpeed; })).Repeatedly()
     );
 }
 
 frc2::CommandPtr Sequences::StopShooterSystem(Shooter *m_shooter, Indexer *m_indexer) {
     return m_shooter->SetSpeedCmd(0)
-        .AlongWith(m_indexer->SetSpeedCmd(0));
+        .AlongWith(m_indexer->RunCmd(0));
 }

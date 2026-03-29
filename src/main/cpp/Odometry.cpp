@@ -1,7 +1,5 @@
 #include "Odometry.h"
 
-Odometry::Odometry() {}
-
 Odometry::Odometry(std::function<units::meter_t()> leftDistanceSource, std::function<units::meter_t()> rightDistanceSource, std::function<units::degree_t()> turretAngleSource) :
     m_leftDistanceSource(leftDistanceSource),
     m_rightDistanceSource(rightDistanceSource),

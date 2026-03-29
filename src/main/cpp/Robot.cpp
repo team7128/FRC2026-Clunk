@@ -26,13 +26,13 @@ Robot::Robot() :
 		[this] { return -m_driveController.GetRightX() * RobotConstants::kTurnMultiplier; }
 	));
 
-  m_driveController.Y().WhileTrue(m_intake.SetSpeedCmd( [] { return RobotConstants::kIntakeSpeed; }));
+  m_driveController.B().WhileTrue(m_intake.RunCmd( [] { return RobotConstants::kIntakeSpeed; }));
   m_driveController.A().OnTrue(m_winch.Lift());
-  m_driveController.B().OnTrue(m_winch.Lower());
+  m_driveController.A().OnFalse(m_winch.Lower());
 
   m_shootController.Back().WhileTrue(m_turret.HomePosition());
   m_shootController.Start().WhileTrue(m_turret.TrackTargetCmd());
-  m_shootController.LeftBumper().WhileTrue(m_indexer.SetSpeedCmd( [] { return RobotConstants::kIndexerSpeed; }));
+  m_shootController.LeftBumper().WhileTrue(m_indexer.RunCmd( [] { return RobotConstants::kIndexerSpeed; }));
   
   m_shootController.X().WhileTrue(m_shooter.SetSpeedCmd( [] { return RobotConstants::kHubShooterSpeed; }));
 

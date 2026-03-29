@@ -11,13 +11,15 @@
 
 class Winch : public frc2::SubsystemBase {
     private:
-    ctre::phoenix::motorcontrol::can::TalonSRX m_motorLeft{WinchConstants::kTalonLeftID};
-    ctre::phoenix::motorcontrol::can::TalonSRX m_motorRight{WinchConstants::kTalonRightID};
-    frc::DigitalInput m_limitswitch{WinchConstants::kLimitSwitchID};
+    ctre::phoenix::motorcontrol::can::TalonSRX m_motorLeft, m_motorRight;
+    frc::DigitalInput m_limitswitch;
 
     public:
     Winch();
 
     frc2::CommandPtr Lift();
     frc2::CommandPtr Lower();
+
+    frc2::CommandPtr RunCmd(float speed);
+    frc2::CommandPtr StopCmd();
 };
