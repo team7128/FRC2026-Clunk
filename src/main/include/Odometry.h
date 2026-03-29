@@ -25,7 +25,7 @@ private:
 private:
     std::function<units::degree_t()> m_turretAngleSource;
     photon::PhotonCamera m_visionCam{ "VisionCam" };
-    photon::PhotonPoseEstimator m_visionPoseEstimator{ frc::AprilTagFieldLayout::LoadField(frc::AprilTagField::k2025ReefscapeAndyMark), frc::Transform3d() };
+    photon::PhotonPoseEstimator m_visionPoseEstimator{ frc::AprilTagFieldLayout::LoadField(frc::AprilTagField::k2026RebuiltAndyMark), frc::Transform3d() };
 
 private:
     void UpdateVisionTransform();
