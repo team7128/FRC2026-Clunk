@@ -8,7 +8,7 @@
 
 class Shooter : public frc2::SubsystemBase {
     private: 
-    rev::spark::SparkMax m_motor{ShooterConstants::kSparkID, rev::spark::SparkBase::MotorType::kBrushless};
+    rev::spark::SparkMax m_motor{IDConstants::kSparkShooter, rev::spark::SparkBase::MotorType::kBrushless};
 
     public:
     Shooter();

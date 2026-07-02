@@ -24,7 +24,9 @@ namespace IDConstants {
     constexpr int kSparkFL = 1,
         kSparkFR = 2,
         kSparkBL = 3,
-        kSparkBR = 4;
+        kSparkBR = 4,
+        kSparkTurret = 5,
+        kSparkShooter = 6;
 
     constexpr int kVictorTransfer = 1;
     constexpr int kVictorConveyor = 2;
@@ -39,7 +41,6 @@ namespace SequenceConstants {
 }
 
 namespace ShooterConstants {
-    constexpr int kSparkID = 6;
     constexpr double kMaxShooterDistance = 100;
 }
 
