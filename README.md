@@ -5,8 +5,8 @@
 Driver Controller
 | Button | Action |
 |--------|--------|
-| Left stick | Drive forward |
-| Right stick | Turn |
+| Left Stick | Drive forward |
+| Right Stick | Turn |
 | A | Lift intake |
 | B | Run intake |
 
