@@ -1,22 +1,22 @@
-# FRC2026-Clunk
+# XLR8 7128 Main Robot Code (2026)
 
 ## Controls
 
-Driver Controller
+Driver Controller (Port 0)
 | Button | Action |
 |--------|--------|
-| Left Stick | Drive forward |
-| Right Stick | Turn |
-| A | Lift intake |
-| B | Run intake |
+| Left Stick Vertical | Drive forward |
+| Right Stick Horizontal | Turn |
+| A Button | Lift intake |
+| B Button | Run intake |
 
-Shooter Controller
+Shooter Controller (Port 1)
 | Button | Action |
 |--------|--------|
 | Back | Home turret |
 | Start | Run turret |
 | Left Bumper | Run indexer |
-| X | Run shooter at scoring speed |
-| Y | Run shooter at passing speed |
-| A | Run shooter system at scoring speed |
-| B | Run shooter system at passing speed |
+| X Button | Run shooter at scoring speed |
+| Y Button | Run shooter at passing speed |
+| A Button | Run shooter system at scoring speed |
+| B Button | Run shooter system at passing speed |
