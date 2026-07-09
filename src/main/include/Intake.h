@@ -4,11 +4,11 @@
 
 #include <frc2/command/CommandPtr.h>
 #include <frc2/command/SubsystemBase.h>
-#include <ctre/phoenix/motorcontrol/can/VictorSPX.h>
+#include <ctre/phoenix6/TalonFX.hpp>
 
 class Intake : public frc2::SubsystemBase {
     private:
-    ctre::phoenix::motorcontrol::can::VictorSPX m_motor;
+    ctre::phoenix6::hardware::TalonFX m_motor;
 
     public:
     Intake();

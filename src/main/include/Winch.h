@@ -11,7 +11,7 @@
 
 class Winch : public frc2::SubsystemBase {
     private:
-    ctre::phoenix::motorcontrol::can::TalonSRX m_motorLeft, m_motorRight;
+    ctre::phoenix::motorcontrol::can::TalonSRX m_motor;
     frc::DigitalInput m_limitswitch;
 
     public:

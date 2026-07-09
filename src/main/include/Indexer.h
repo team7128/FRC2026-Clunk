@@ -8,7 +8,7 @@
 
 class Indexer : public frc2::SubsystemBase {
     private:
-    ctre::phoenix::motorcontrol::can::WPI_VictorSPX m_motorTransfer, m_motorConveyor;
+    ctre::phoenix::motorcontrol::can::WPI_VictorSPX m_motorIndexer, m_motorConveyor;
 
     public:
     Indexer();

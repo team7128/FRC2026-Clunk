@@ -22,18 +22,18 @@ namespace RobotConstants {
 
 namespace IDConstants {
     constexpr int kSparkFL = 1,
-        kSparkFR = 2,
-        kSparkBL = 3,
-        kSparkBR = 4,
-        kSparkTurret = 5,
-        kSparkShooter = 6;
+        kSparkBL = 2,
+        kSparkFR = 3,
+        kSparkBR = 4;
 
-    constexpr int kVictorTransfer = 1;
+    constexpr int kSparkTurret = 5;
+    constexpr int kSparkShooter = 6;
+
+    constexpr int kVictorIndexer = 1;
     constexpr int kVictorConveyor = 2;
-    constexpr int kVictorIntake = 3;
+    constexpr int kVictorLift = 3;
 
-    constexpr int kTalonWinchLeft = 1;
-    constexpr int kTalonWinchRight = 2;
+    constexpr int kTalonIntake = 1;
 }
 
 namespace SequenceConstants {

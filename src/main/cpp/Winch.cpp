@@ -7,16 +7,12 @@
 using namespace ctre::phoenix::motorcontrol;
 
 Winch::Winch() :
-    m_motorLeft(IDConstants::kTalonWinchLeft),
-    m_motorRight(IDConstants::kTalonWinchRight),
+    m_motor(IDConstants::kVictorLift),
     m_limitswitch(WinchConstants::kLimitSwitchID)
 {
-    m_motorRight.Follow(m_motorLeft);
 
-    m_motorLeft.SetNeutralMode(NeutralMode::Brake);
-    m_motorRight.SetNeutralMode(NeutralMode::Brake);
-    m_motorLeft.SetInverted(InvertType::None);
-    m_motorRight.SetInverted(InvertType::OpposeMaster);
+    m_motor.SetNeutralMode(NeutralMode::Brake);
+    m_motor.SetInverted(InvertType::None);
 
     SetDefaultCommand(StopCmd());
 }
@@ -32,10 +28,10 @@ frc2::CommandPtr Winch::Lower() {
 }
 
 frc2::CommandPtr Winch::RunCmd(float speed) {
-    return this->Run([this, speed] { m_motorLeft.Set(ControlMode::PercentOutput, speed); });
+    return this->Run([this, speed] { m_motor.Set(ControlMode::PercentOutput, speed); });
 }
 
 frc2::CommandPtr Winch::StopCmd()
 {
-    return this->Run([this] { m_motorLeft.Set(ControlMode::Disabled, 0); });
+    return this->Run([this] { m_motor.Set(ControlMode::Disabled, 0); });
 }
