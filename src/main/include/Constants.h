@@ -12,15 +12,28 @@ namespace RobotConstants {
     constexpr double kIntakeSpeed = 0.8;
     constexpr double kIndexerSpeed = 1;
     constexpr double kHubShooterSpeed = 1;
-    constexpr double kPassShooterSpeed = 0.3;
+    constexpr double kPassShooterSpeed = 0.5;
     constexpr int kTurretAxis = 4;
     constexpr double kTurretThreshold = 0.1;
 
-    constexpr int kDriveControllerID = 0;
-    constexpr int kShootControllerID = 1;
-
     constexpr float kForwardMultiplier = 0.8f;
     constexpr float kTurnMultiplier = 0.6f;
+}
+
+namespace IDConstants {
+    constexpr int kSparkFL = 1,
+        kSparkBL = 2,
+        kSparkFR = 3,
+        kSparkBR = 4;
+
+    constexpr int kSparkTurret = 5;
+    constexpr int kSparkShooter = 6;
+
+    constexpr int kVictorIndexer = 1;
+    constexpr int kVictorConveyor = 2;
+    constexpr int kVictorLift = 3;
+
+    constexpr int kTalonIntake = 1;
 }
 
 namespace SequenceConstants {
@@ -28,7 +41,6 @@ namespace SequenceConstants {
 }
 
 namespace ShooterConstants {
-    constexpr int kSparkID = 6;
     constexpr double kMaxShooterDistance = 100;
 }
 
@@ -56,17 +68,14 @@ namespace TurretConstants {
 }
 
 namespace IntakeConstants {
-    constexpr int kVictorID = 3;
 }
 
 namespace IndexerConstants {
-    constexpr int kVictorIndexerID = 1;
-    constexpr int kVictorConveyorID = 2;
 }
 
 namespace WinchConstants {
-    constexpr double kLiftSpeed = 0.1;
-    constexpr double kLowerSpeed = -1;
+    constexpr double kLiftSpeed = 1.0;
+    constexpr double kLowerSpeed = -1.0;
     constexpr auto kLiftTime = 2_s; // Todo: time actual speed
 
     constexpr int kTalonLeftID = 4;

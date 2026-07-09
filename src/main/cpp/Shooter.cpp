@@ -1,6 +1,5 @@
 #include "Shooter.h"
 
-
 Shooter::Shooter() {}
 
 frc2::CommandPtr Shooter::SetSpeed(double speed) {

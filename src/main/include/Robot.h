@@ -40,8 +40,10 @@ class Robot : public frc::TimedRobot {
   const std::string kAutoNameDefault = "Default";
   const std::string kAutoNameCustom = "My Auto";
   std::string m_autoSelected;
-  frc2::CommandXboxController m_driveController{RobotConstants::kDriveControllerID};
-  frc2::CommandXboxController m_shootController{RobotConstants::kShootControllerID};
+
+  frc2::CommandXboxController m_driveController{0};
+  frc2::CommandXboxController m_shootController{1};
+
   Turret m_turret;
   Intake m_intake;
   Shooter m_shooter;

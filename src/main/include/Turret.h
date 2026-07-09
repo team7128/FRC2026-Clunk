@@ -16,7 +16,7 @@
 
 class Turret : public frc2::SubsystemBase {
     private:
-    rev::spark::SparkMax m_motorcontrol{TurretConstants::kSparkID, rev::spark::SparkLowLevel::MotorType::kBrushless};
+    rev::spark::SparkMax m_motorcontrol{IDConstants::kSparkTurret, rev::spark::SparkLowLevel::MotorType::kBrushless};
     float m_targetangle;
 
     using ffType = frc::SimpleMotorFeedforward<units::degrees>;

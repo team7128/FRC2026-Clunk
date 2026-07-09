@@ -1,12 +1,19 @@
 #include "Intake.h"
 
-Intake::Intake() {}
 
-void Intake::SetSpeed(double speed)
+Intake::Intake() :
+    m_motor(IDConstants::kTalonIntake)
 {
-    m_motor.Set(speed);
+    m_motor.SetNeutralMode(ctre::phoenix6::signals::NeutralModeValue::Brake);
+
+    SetDefaultCommand(StopCmd());
 }
 
-frc2::CommandPtr Intake::SetSpeedCmd(std::function<float()> speed) {
-    return this->Run([this, speed] { this->m_motor.Set(speed()); });
+frc2::CommandPtr Intake::RunCmd(std::function<float()> speed) {
+    return this->Run([this, speed] { m_motor.Set(speed()); });
+}
+
+frc2::CommandPtr Intake::StopCmd()
+{
+    return this->Run([this] { m_motor.Set(0); });
 }

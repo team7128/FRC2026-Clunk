@@ -17,7 +17,6 @@ private:
     frc::DifferentialDrivePoseEstimator m_poseEstimator{m_kinematics, m_navXGyro.GetRotation2d(), 0_m, 0_m, frc::Pose2d()};
 
     public:
-    Odometry();
     Odometry(std::function<units::meter_t()> leftDistanceSource, std::function<units::meter_t()> rightDistanceSource, std::function<units::degree_t()> turretAngleSource);
     void Periodic();
 

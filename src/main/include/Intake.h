@@ -4,15 +4,15 @@
 
 #include <frc2/command/CommandPtr.h>
 #include <frc2/command/SubsystemBase.h>
-#include <ctre/phoenix/motorcontrol/can/WPI_VictorSPX.h>
+#include <ctre/phoenix6/TalonFX.hpp>
 
 class Intake : public frc2::SubsystemBase {
     private:
-    ctre::phoenix::motorcontrol::can::WPI_VictorSPX m_motor{IntakeConstants::kVictorID};
+    ctre::phoenix6::hardware::TalonFX m_motor;
 
     public:
     Intake();
 
-    void SetSpeed(double speed);
-    frc2::CommandPtr SetSpeedCmd(std::function<float()> speed);
+    frc2::CommandPtr RunCmd(std::function<float()> speed);
+    frc2::CommandPtr StopCmd();
 };
